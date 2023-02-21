@@ -1,0 +1,31 @@
+
+
+    {% extends "layout.html" %}
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <form class="form-horizontal" name="form1" action="/resultado" method="post">
+                <div class="control-group">
+                    <labe for="txtNum1" class="control-labe">Numero1 </labe>
+                    <div class="controls">
+                        <input type="text" name="txtNum1" placeholder="Numero1" value="">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <labe for="txtNum2" class="control-labe">Numero2 </labe>
+                    <div class="controls">
+                        <input type="text" name="txtNum2" placeholder="Numero2" value="">
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" class="btn btn-default btn-primary">
+                            <i class="class-book icon-white"></i>Calcular</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% endblock %}
+
+

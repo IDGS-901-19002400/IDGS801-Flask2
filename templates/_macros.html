@@ -1,0 +1,23 @@
+{% macro render input(name,placeholder,type="text")%}
+
+<div class="control-group">
+    <labe for="{{name}}" class="control-labe">{{placeholder}} </labe>
+    <div class="controls">
+        <input type="{{type}}" name="txtNum1" class="input-xlarge">
+    </div>
+</div>
+
+{% endmacro %}
+
+
+
+{% macro render_field(field) %}
+
+<div class="control-group">
+    <div class="control">
+        {{field.label}}
+        {{field(**kwargs)|safe}} 
+    </div>
+</div>
+
+{%endmacro%}

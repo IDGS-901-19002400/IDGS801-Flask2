@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+{% from "_macross.html" import render_field, render_input %}
+
+
+    <form action="/cajas" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        {{ render_field(form.cantidad) }}
+            <button type="submit">Enviar</button>
+    </form>
+    {% if form.cantidad.data %}
+    <hr>
+    <form action="/resultado" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <h2>Cajas</h2>
+            {% for i in range(0, form.cantidad.data) %}
+            {{ render_input(name="numeros-" ~ i) }}
+            {% endfor %}
+        <div class="mt-5 text-center">
+            <button type="submit">Enviar</button>
+        </div>
+        
+
+    </form>
+    {% endif %}
+
+{% endblock %}
