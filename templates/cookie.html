@@ -1,0 +1,34 @@
+{% extends "layouts/index.html" %} {% block content %} {% from "_macros.html"
+import render_field %}
+
+<div class="mt-5">
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <h1 class="display-4 fw-semibold text-center">Login</h1>
+            <hr />
+            <form action="" method="POST" novalidate>
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}"
+                />
+                {{ render_field(form.username, class="form-control") }} {{
+                render_field(form.password, class="form-control") }}
+
+                <div class="mt-5 text-center">
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg px-5 rounded-pill fw-semibold"
+                    >
+                        ENVIAR
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+{%endblock%}

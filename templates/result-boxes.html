@@ -1,0 +1,40 @@
+{% extends "layouts/index.html" %} {% block content %}
+
+<h1 class="display-4 fw-semibold">Hello World</h1>
+
+{% from "_macros.html" import render_field, render_input %}
+
+<hr />
+<div class="mt-5">
+    <h5>Numbers</h5>
+    <ul>
+        {% for number in numbers %}
+            <li>{{ number }}</li>
+        {% endfor %}
+    </ul>
+    <hr class="my-5">
+    
+    <h5>Min Number</h5>
+    <p class="fs-1">{{ minNum }}</p>
+
+    <hr class="my-5">
+    <h5>Max Number</h5>
+    <p class="fs-1">{{ maxNum }}</p>
+
+    <hr class="my-5">
+    <h5>Average</h5>
+    <p class="fs-1">{{ average }}</p>
+
+    <hr class="my-5">
+    <h5>Repeted Values</h5
+    <ul>
+        {% for key in mapValues %}
+        <li class="d-flex gap-3">
+            <span class="fw-bold ms-5">{{ key }}:</span>
+            <span class="fw-bold">{{ mapValues[key] }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

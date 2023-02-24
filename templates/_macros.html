@@ -1,23 +1,29 @@
-{% macro render input(name,placeholder,type="text")%}
+{% macro render_input(name, placeholder, type, classes) %}
 
-<div class="control-group">
-    <labe for="{{name}}" class="control-labe">{{placeholder}} </labe>
-    <div class="controls">
-        <input type="{{type}}" name="txtNum1" class="input-xlarge">
-    </div>
+<div class="mb-3">
+    <label for="{{ name }}" class="form-label">{{placeholder}}</label>
+    <input
+        type="{{ type or 'text'}}"
+        id="{{name}}"
+        name="{{ name }}"
+        class="{{ classes or 'form-control' }}"
+        placeholder="{{ placeholder }}"
+    />
 </div>
+
+{% endmacro %} {% macro render_field(field) %}
+
+<div class="mb-3">
+    <label for="{{ name }}" class="form-label">{{placeholder}}</label>
+    {{ field.label }} {{ field(**kwargs)|safe }}
+</div>
+
+{% if field.errors %}
+    <ul class="text-danger">
+        {% for error in field.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul> 
+{% endif %}
 
 {% endmacro %}
-
-
-
-{% macro render_field(field) %}
-
-<div class="control-group">
-    <div class="control">
-        {{field.label}}
-        {{field(**kwargs)|safe}} 
-    </div>
-</div>
-
-{%endmacro%}

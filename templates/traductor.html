@@ -1,0 +1,62 @@
+{% extends "layouts/index.html" %} {% block content %}
+
+<h1 class="display-4 fw-semibold">Translate</h1>
+
+{% from "_macros.html" import render_field %}
+
+<hr />
+<div class="container mt-5">
+    <form action="/translate" method="POST" novalidate>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+        {{ render_field(form.spanish, class="form-control") }} {{
+        render_field(form.english, class="form-control") }}
+
+        <div class="mt-5 text-center">
+            <button
+                type="submit"
+                class="btn btn-primary btn-lg px-5 rounded-pill fw-semibold"
+            >
+                GUARDAR
+            </button>
+        </div>
+    </form>
+    <hr />
+    <div class="mt-5">
+        <form action="/convert" method="POST" novalidate>
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+            <div>
+                <input
+                    type="radio"
+                    name="language"
+                    value="spanish"
+                    id="spanish_radio"
+                    checked
+                />
+                <label for="spanish_radio">Español</label>
+                <input
+                    type="radio"
+                    name="language"
+                    value="english"
+                    id="english_radio"
+                />
+                <label for="english_radio">Ingles</label>
+            </div>
+
+            {{ render_field(form.text, class="form-control") }}
+
+            {% if translation %}
+            <p class="fs-2 fw-semibold">{{ translation }}</p>
+            {% endif %}
+            <div class="mt-5 text-center">
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-lg px-5 rounded-pill fw-semibold"
+                >
+                    TRADUCIR
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

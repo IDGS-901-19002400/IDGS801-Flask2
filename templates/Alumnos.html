@@ -1,23 +1,41 @@
-{% extends "layout.html" %}
-{% block content %}
-<div class="col xs-6">
-    {% from "_macros.html" import render_field %}
-    <form action="" method="post">
-    <div class="row control-group">
-        <div class="form-group">
-            {{render_field(form.matricula)}}
+{% extends "layouts/index.html" %} {% block content %}
+
+<h1 class="display-4 fw-semibold">Hello World</h1>
+
+{% from "_macros.html" import render_field %}
+
+<hr />
+<div class="mt-5">
+    <div class="row">
+        <div class="col-sm-6">
+            <form action="" method="POST" novalidate>
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}"
+                />
+                {{ render_field(form.id, class="form-control") }} {{
+                render_field(form.name, class="form-control") }} {{
+                render_field(form.lastname, class="form-control") }} {{
+                render_field(form.email, class="form-control") }}
+
+                <div class="mt-5 text-center">
+                    <button
+                        type="submit"
+                        class="btn btn-primary btn-lg px-5 rounded-pill fw-semibold"
+                    >
+                        ENVIAR
+                    </button>
+                </div>
+            </form>
         </div>
-        {{render_field(form.nombre)}}
-        {{render_field(form.apaterno)}}
-        {{render_field(form.amaterno)}}
-        {{render_field(form.email)}}
-   <input type="submit" value="Registrar" >
+        <div class="col-sm-6">
+            <div class="fs-4">
+                <p>Matricula: {{ form.id.data }}</p>
+                <p>Nombre: {{ form.name.data }}</p>
+            </div>
+        </div>
     </div>
-</form>
-</div>
-<div class="col-md-6">
-    <h3>Matricula: {{mat}}</h3>
-    <h3>Matricula: {{nom}}</h3>
 </div>
 
-{%endblock%}
+{% endblock %}
