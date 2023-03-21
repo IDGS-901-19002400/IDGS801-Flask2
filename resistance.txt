@@ -1,0 +1,3 @@
+brown  danger  warning  silver
+danger  danger  indigo  silver
+indigo  danger  success  gold

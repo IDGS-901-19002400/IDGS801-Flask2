@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <title></title>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            rel="stylesheet"
-            href="./../static/assets/css/bootstrap.min.css"
-        />
-        <link href="css/style.css" rel="stylesheet" />
-    </head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SITO</title>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 60px;
+        }
+
+        .tr-head {
+            background: #dff0d8;
+        }
+    </style>
+    <link rel="stylesheet" href="../static/bootstrap/css/bootstrap-responsive.css">
+</head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">UTL-IDGS-801</a>
-                <a class="navbar-brand" href="#">Alumnos </a>
-                <a class="navbar-brand" href="#">Usuarios</a>
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div
-                    class="collapse navbar-collapse"
-                    id="navbarSupportedContent"
-                >
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a
-                                class="nav-link active"
-                                aria-current="page"
-                                href="/"
-                                >Inicio</a
-                            >
+        <div class="navbar navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="brand" href="">
+                        UTL-IDGS
+                    </a>
+                    <ul class="nav">
+                        <li>
+                            <a href="">
+                                <i class="icon-home icon-white"></i>
+                                Inicio
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-user icon-white"></i>
+                                Usuarios
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="icon-home icon-white"></i>
+                                Alumnos
+                            </a>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-        <main class="mt-5 container">
-            {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-success">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-            {% endwith %}
-            {% block content %} {% endblock %}
-        </main>
+        </div>
+        <div class="container">
+            {%block content %}
+            {%endblock%}
+        </div>
+        
     </body>
 </html>

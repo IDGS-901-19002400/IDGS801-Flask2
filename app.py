@@ -5,15 +5,17 @@ from flask_wtf.csrf import CSRFProtect
 from forms import UserForm, LoginForm 
 from cajasForm import DinamicBoxForm
 from traductor_met import addTranslation, getTranslation
+from form import *
+from resistencia import *
 
 csrf = CSRFProtect()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "peuproweiu"
 csrf.init_app(app)
 
-@app.get('/')
+""" @app.get('/')
 def index():
-    return render_template('form-test.html')
+    return render_template('form-test.html') """
 
 @app.get('/pupils')
 def pupils():
@@ -75,6 +77,8 @@ def create_translate():
 
     addTranslation(form.spanish.data, form.english.data)
 
+    flash("Palabras guardadas!")
+
     return redirect('/translate')
 
 
@@ -84,6 +88,11 @@ def convert():
     
     print(request.form.get('language'))
     translation = getTranslation(form.text.data, request.form.get('language'))
+
+    if translation == False:
+     flash("La palabra no fue encontrada","Error")
+    else:
+     flash("Palabra encontrada")
 
     return render_template('traductor.html', form=form, translation=translation)
     
@@ -107,6 +116,28 @@ def create_cookies():
     flash(f"Bienvenido {username}")
 
     return response
+
+@app. context_processor
+def utility_processor():
+    def getItemColor(item, position):
+        if position > 3:
+            return [t[1] for t in TOLERANCE if t[0] == item][0] or ''
+        return [color[0] for color in COLORS if color[position] == item][0] or 'white'
+    return dict(getItemColor=getItemColor)
+
+@app. get('/resistance')
+def resistance():
+    form = ResistanceForm()
+    data = [calculate(*resistance) for resistance in getResistance()] 
+    print(data)
+
+    return render_template('resistencia.html', form=form, data = data, colors = COLORS)
+
+@app. post('/resistance')
+def create_resistance():
+    form  =  ResistanceForm(request. form)
+    saveResistance(form. firstBand. data, form. secondBand. data, form. thirdBand. data, form. tolerance. data)
+    return redirect('/resistance')
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)

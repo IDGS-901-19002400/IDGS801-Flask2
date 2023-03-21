@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Calcular resistencia</h1>
+
+    {% from "_macros.html" import render_field %}
+    <div class="mt-5">
+        <div class="row justify-content-center">
+            <div class="col-sm-6">
+                <form action="/resistance" method="POST" novalidate>
+                    <input
+                        type="hidden"
+                        name="csrf_token"
+                        value="{{ csrf_token() }}"
+                    />
+                    {{ render_field(form.firstBand, class="form-select") }} {{
+                    render_field(form.secondBand, class="form-select") }} {{
+                    render_field(form.thirdBand, class="form-select") }} {{
+                    render_field(form.tolerance, class="form-select") }}
+    
+                    <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill fw-semibold">
+                            CACULAR
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <table class=" mt-5 table caption-top border border-2 rounded-4 overflow-hidden">
+                    <caption>
+     List of Resistances
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Banda 1</th>
+                            <th>Banda 2</th>
+                            <th>Banda 3</th>
+                            <th>Tolerancia</th>
+                            <th>Resistencia</th>
+                            <th>min</th>
+                            <th>max</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for first, second, third, tolerance, result, min, max in data %}
+                        <tr>
+                            <td class="bg-{{ first }} text-center text-white">{{ first }}</td>
+                            <td class="bg-{{ second }} text-center text-white">{{ second }}</td>
+                            <td class="bg-{{ third }} text-center text-white">{{ third }}</td>
+                            <td class="bg-{{ tolerance }} text-center text-dark">{{ tolerance }}</td>
+                            <td>{{ result }}</td>
+                            <td>{{ min }}</td>
+                            <td>{{ max }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

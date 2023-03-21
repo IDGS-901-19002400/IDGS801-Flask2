@@ -1,6 +1,6 @@
 {% extends "layouts/index.html" %} {% block content %}
 
-<h1 class="display-4 fw-semibold">Translate</h1>
+<h1 class="display-4 fw-semibold"></h1>
 
 {% from "_macros.html" import render_field %}
 
@@ -22,6 +22,28 @@
     </form>
     <hr />
     <div class="mt-5">
+       
+
+        {% with messages = get_flashed_messages(with_categories=true)%}
+        {%if messages %}
+        <ul class="flashes">
+            
+            {%for category, message in messages %}
+            {% if message == "La palabra no fue encontrada" %}
+            <div class="alert alert-danger">{{message}}</div>
+         
+            {%else%}
+            <div class="alert alert-success">{{message}}</div>
+            {%endif%}
+            {%endfor%}
+
+           
+        </ul>
+        {%endif%}
+        {%endwith%}
+
+        
+
         <form action="/convert" method="POST" novalidate>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
             <div>
@@ -56,6 +78,8 @@
                 </button>
             </div>
         </form>
+       
+
     </div>
 </div>
 

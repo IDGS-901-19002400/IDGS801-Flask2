@@ -1,4 +1,3 @@
-
 from wtforms import Form, validators
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, Field, FormField, SelectField, RadioField
@@ -26,10 +25,27 @@ class LoginForm(Form):
             validators.DataRequired(message='El campo es requerido'),
             validators.length(min=5, max=10, message='Ingresa min 5 max 10'),
         ])
-    
 
+COLORS = [
+        'dark',
+        'brown',
+        'danger',
+        'orange',
+        'warning',
+        'success',
+        'primary',
+        'indigo',
+        'gray',
+        'light'
+        ];
 
+TOLERANCE = [
+        'gold',
+        'silver'
+        ]
 
- 
-
-
+class ResistanceForm(Form):
+    firstBand = SelectField('Banda 1', choices=[(color, color) for color in COLORS])
+    secondBand = SelectField('Banda 2', choices=[(color, color) for color in COLORS]) 
+    thirdBand = SelectField('Banda 3', choices=[(color, color) for color in COLORS])
+    tolerance = SelectField('Tolerancia', choices=[(tole, tole) for tole in TOLERANCE])

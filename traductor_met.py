@@ -13,4 +13,4 @@ def getTranslation(text, language):
         if len(word) > 0:
             return word[0];
         else:
-            return ''
+            return False
